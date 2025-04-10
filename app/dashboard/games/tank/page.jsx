@@ -249,7 +249,7 @@ const calculateAngle = (x1, y1, x2, y2) => {
                   ref={canvasRef} 
                   width={canvasWidth}
                   height={canvasHeight}
-                  className="border-4 border-gray-800 bg-gray-900 border-gray-600 rounded-md"
+                  className="border-4 border-gray-800 bg-gray-900 rounded-md"
                 />
 
                 <div className="mt-6 w-full max-w-xl flex justify-between">

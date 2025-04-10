@@ -1,5 +1,5 @@
 {
-  "name": "game_arena_gpt",
+  "name": "aptosagent",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.0",
     "axios": "^1.7.8",
+    "chess.js": "^1.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
@@ -20,10 +21,12 @@
     "next-auth": "^4.24.10",
     "openai": "^4.73.1",
     "react": "^18",
+    "react-chessboard": "^4.7.2",
     "react-dom": "^18",
     "react-type-animation": "^3.2.0",
     "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "worker-loader": "^3.0.8"
   },
   "devDependencies": {
     "@types/react": "18.3.12",

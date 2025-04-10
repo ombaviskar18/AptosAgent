@@ -46,24 +46,111 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl">
           
-          {/* Shooting Card */}
-          <Link href="dashboard/games/shoot">
+          {/* Foru Card */}
+          <Link href="dashboard/games/connectfour">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
             >
-              <img src="/shoot.png" alt="Tetris" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
-              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Color shooting</h2>
-              <p className="text-gray-300 font-retro">Shoot the black color spot created by agent and earn maximum points by shoot it.</p>
+              <img src="/four.png" alt="Memory" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
+              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Connect Four AI</h2>
+              <p className="text-gray-300 font-retro">Drop coins into the grid and try to beat AI in a four-in-a-row match.</p>
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
             </motion.div>
           </Link>
-          
-          
 
-          {/* Tank Card */}
-          <Link href="dashboard/games/tank">
+            {/* REaction Card */}
+            <Link href="dashboard/games/reaction">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+            >
+              <img src="/reaction.png" alt="Memory" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
+              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Reaction Duel</h2>
+              <p className="text-gray-300 font-retro">Test your reflexes against the AI — who can click the fastest when the screen flashes?</p>
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+            </motion.div>
+          </Link>
+         
+          
+         
+
+           {/* Chess Card */}
+           <Link href="dashboard/games/chess">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+            >
+              <img src="/chess.png" alt="Tetris" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
+              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">AI Chess Blitz</h2>
+              <p className="text-gray-300 font-retro"> A speed version of chess where you have seconds per move against an adaptive AI.</p>
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+            </motion.div>
+          </Link>
+
+           {/* Maze Card */}
+           <Link href="dashboard/games/maze">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+            >
+              <img src="/maze.png" alt="maze" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
+              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Maze Escape</h2>
+              <p className="text-gray-300 font-retro">Race against an AI to exit a randomly generated maze first.</p>
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+            </motion.div>
+          </Link>
+
+        
+           {/* Memory Card */}
+           <Link href="dashboard/games/memory">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+            >
+              <img src="/memory.png" alt="Memory" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
+              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Memory Match</h2>
+              <p className="text-gray-300 font-retro">Flip and match cards faster than the AI using memory skills.</p>
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+            </motion.div>
+          </Link>
+
+             {/* TTT Card */}
+           <Link href="dashboard/games/ttt">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+            >
+              <img src="/tic.png" alt="Memory" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
+              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Tic Tac Toe</h2>
+              <p className="text-gray-300 font-retro">Cahllenge Tic Tac toe play with ai and win it.</p>
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+            </motion.div>
+          </Link>
+
+               {/* Hangman Card */}
+          <Link href="dashboard/games/hang">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+            >
+              <img src="/hang.png" alt="Tetris" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
+              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Hangman challenge</h2>
+              <p className="text-gray-300 font-retro">Guess the word before the stick figure is complete — AI picks tricky ones.</p>
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+            </motion.div>
+          </Link>
+           
+           
+            {/* Tank Card */}
+            <Link href="dashboard/games/tank">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -72,6 +159,22 @@ const Dashboard = () => {
               <img src="/tank.png" alt="Tetris" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
               <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Tank fire Game</h2>
               <p className="text-gray-300 font-retro">Aim to Ai tank then fire to tank and win againt Ai</p>
+              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
+            </motion.div>
+          </Link>
+          
+
+
+           {/* Shooting Card */}
+           <Link href="dashboard/games/shoot">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+            >
+              <img src="/shoot.png" alt="Tetris" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
+              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Color shooting</h2>
+              <p className="text-gray-300 font-retro">Shoot the black color spot created by agent and earn maximum points by shoot it.</p>
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
             </motion.div>
           </Link>
@@ -89,7 +192,7 @@ const Dashboard = () => {
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
             </motion.div>
           </Link>
- 
+
            {/* Snake Card */}
            <Link href="dashboard/games/snake">
             <motion.div

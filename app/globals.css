@@ -153,3 +153,49 @@
 ::-webkit-scrollbar-thumb {
     transition: background-color 0.3s ease;
 }
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+/* globals.css */
+@keyframes drop {
+  0% { transform: translateY(-500%); }
+  100% { transform: translateY(0); }
+}
+
+.animate-drop {
+  animation: drop 0.3s ease-out;
+}
+
+.chess-board {
+  --dark-square: #779556;
+  --light-square: #ebecd0;
+  --highlight: #ffff33;
+}
+
+.react-chessboard {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.react-chessboard .board {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.react-chessboard .square {
+  transition: background-color 0.2s ease;
+}
+
+.react-chessboard .square:hover {
+  background-color: var(--highlight) !important;
+  cursor: pointer;
+}
