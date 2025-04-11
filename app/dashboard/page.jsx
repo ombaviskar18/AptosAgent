@@ -143,11 +143,10 @@ const Dashboard = () => {
             >
               <img src="/hang.png" alt="Tetris" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
               <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Hangman challenge</h2>
-              <p className="text-gray-300 font-retro">Guess the word before the stick figure is complete — AI picks tricky ones.</p>
+              <p className="text-gray-300 font-retro">Guess the word before the stick figure.</p>
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
             </motion.div>
           </Link>
-           
            
             {/* Tank Card */}
             <Link href="dashboard/games/tank">
@@ -206,23 +205,6 @@ const Dashboard = () => {
               <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
             </motion.div>
           </Link>
-
-
-          {/* Tetris Card */}
-          <Link href="dashboard/games/tetris">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gray-800 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
-            >
-              <img src="/tetris.png" alt="Tetris" className="w-full h-48 object-cover rounded-t-lg mb-4 pixel-art" />
-              <h2 className="text-2xl font-semibold mb-4 text-white font-retro">Tetris</h2>
-              <p className="text-gray-300 font-retro">Stack the falling blocks to create complete lines and score points.</p>
-              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-lg"></div>
-            </motion.div>
-          </Link>
-          
-          
 
           {/* Pingpong Card */}
           <Link href="dashboard/games/pingpong">

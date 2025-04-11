@@ -332,55 +332,11 @@ const initGame = () => {
                       RESTART
                     </button>
                   )}
-                  <button 
-                    onClick={toggleCodeView}
-                    className="px-6 py-2 bg-gray-900 text-gray-500 border-2 border-gray-500 rounded hover:bg-gray-800 transition-colors shadow-[0_0_10px_rgba(0,0,255,0.3)]"
-                  >
-                    {showCode ? 'HIDE CODE' : 'SHOW CODE'}
-                  </button>
                 </div>
               </div>
             </div>
 
-            {/* Code Editor with Retro Style */}
-            {showCode && (
-              <div className="w-1/2 bg-gray-900 border-2 border-gray-500 rounded-lg p-6 shadow-[0_0_15px_rgba(0,0,255,0.2)]">
-                <div className="mb-4 flex items-center gap-2">
-                  <Code className="text-gray-500" />
-                  <h2 className="text-2xl font-bold text-gray-500">GAME CODE</h2>
-                </div>
-                <textarea
-                  value={editableCode}
-                  onChange={(e) => setEditableCode(e.target.value)}
-                  className="w-full h-[350px] bg-black text-gray-500 border-2 border-gray-500 rounded p-4 font-mono text-sm focus:outline-none focus:border-gray-400 shadow-[0_0_10px_rgba(0,255,0,0.2)]"
-                  placeholder="Edit your game code here..."
-                />
-                <div className="mt-4 space-y-4 text-bold ">
-                  <button 
-                    onClick={applyCodeChanges}
-                    className="w-full py-2 bg-gray-900 text-gray-500 border-2 border-gray-500 rounded hover:bg-gray-800 transition-colors"
-                  >
-                    APPLY CHANGES
-                  </button>
-                  <div className="flex gap-2">
-                    <input 
-                      value={aiPrompt}
-                      onChange={(e) => setAiPrompt(e.target.value)}
-                      placeholder="Ask AI to modify the game..."
-                      className="flex-grow bg-black text-gray-500 border-2 border-gray-500 rounded px-4 py-2"
-                    />
-                    <button 
-                      onClick={getAiSuggestion}
-                      disabled={isLoading}
-                      className="px-4 py-2 bg-gray-900 text-gray-500 border-2 border-gray-500 rounded hover:bg-gray-800 transition-colors flex items-center gap-2"
-                    >
-                      <Wand2 className="w-4 h-4" />
-                      {isLoading ? 'Generating ...' : 'SUGGEST'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+           
           </div>
         </div>
       </div>

@@ -296,12 +296,6 @@ const MAZE_HEIGHT = ${MAZE_HEIGHT};
                   >
                     NEW MAZE
                   </button>
-                  <button 
-                    onClick={() => setShowCode(!showCode)}
-                    className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded transition-colors"
-                  >
-                    {showCode ? 'HIDE CODE' : 'SHOW CODE'}
-                  </button>
                 </div>
               </div>
             </div>

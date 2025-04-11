@@ -276,54 +276,10 @@ const calculateAngle = (x1, y1, x2, y2) => {
                   >
                     NEW GAME
                   </button>
-                  <button 
-                    onClick={() => setShowCode(!showCode)}
-                    className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded transition-colors"
-                  >
-                    {showCode ? 'HIDE CODE' : 'SHOW CODE'}
-                  </button>
                 </div>
               </div>
             </div>
 
-            {showCode && (
-              <div className="w-1/2 bg-gray-700 rounded-lg p-6">
-                <div className="mb-4 flex items-center gap-2">
-                  <Code className="text-gray-300" />
-                  <h2 className="text-2xl font-bold">GAME CODE</h2>
-                </div>
-                <textarea
-                  value={editableCode}
-                  onChange={(e) => setEditableCode(e.target.value)}
-                  className="w-full h-[500px] bg-gray-800 text-white rounded p-4 font-mono text-sm"
-                  placeholder="Edit game code..."
-                />
-                <div className="mt-4 space-y-4">
-                  <button 
-                    onClick={applyCodeChanges}
-                    className="w-full py-2 bg-gray-600 hover:bg-gray-500 rounded transition-colors"
-                  >
-                    APPLY CHANGES
-                  </button>
-                  <div className="flex gap-2">
-                    <input 
-                      value={aiPrompt}
-                      onChange={(e) => setAiPrompt(e.target.value)}
-                      placeholder="AI modification request..."
-                      className="flex-grow bg-gray-800 rounded px-4 py-2"
-                    />
-                    <button 
-                      onClick={getAiSuggestion}
-                      disabled={isLoading}
-                      className="px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded transition-colors flex items-center gap-2"
-                    >
-                      <Wand2 className="w-4 h-4" />
-                      {isLoading ? 'Thinking...' : 'AI Magic'}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>

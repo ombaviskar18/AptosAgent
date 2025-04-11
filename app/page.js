@@ -148,14 +148,22 @@ const VintageGamesLanding = () => {
       {/* Hero Section */}
       <div className="relative min-h-screen flex items-center justify-center text-center px-4 py-24">
         <div className="max-w-4xl">
-      <Image src="/pc.gif" alt="Logo" className='ml-80' width={202} height={202} />
-          <motion.h1 
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <img
+            src="/pc.gif"
+            alt="Logo"
+            width={202}
+            height={202}
+            className="mb-6"
+          />
+          <motion.h1
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-8xl font-bold mb-6 tracking-wider uppercase"
+            className="text-6xl md:text-8xl font-bold tracking-wider uppercase text-center"
           >
-            Aptos MiniGames Launchpad <span className="text-gray-500 animate-in">By Agent</span>
+                      Aptos MiniGames Launchpad <span className="text-gray-500 animate-in">By Agent</span>
           </motion.h1>
+        </div>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

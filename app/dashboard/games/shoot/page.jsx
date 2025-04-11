@@ -163,21 +163,12 @@ const TARGET_SPAWN_RATE = 0.02;
                   >
                     RESTART
                   </button>
-                  <button 
-                    onClick={() => setShowCode(!showCode)}
-                    className="px-6 py-2 bg-gray-900 text-gray-500 border-2 border-gray-500 rounded hover:bg-gray-800 transition-colors shadow-[0_0_10px_rgba(0,0,255,0.3)]"
-                  >
-                    {showCode ? 'HIDE CODE' : 'SHOW CODE'}
-                  </button>
+                  
                 </div>
               </div>
             </div>
 
-            {showCode && (
-              <div className="w-1/2 bg-gray-900 border-2 border-gray-500 rounded-lg p-6 shadow-[0_0_15px_rgba(0,0,255,0.2)]">
-                {/* Code editor section (same as original) */}
-              </div>
-            )}
+           
           </div>
         </div>
       </div>
