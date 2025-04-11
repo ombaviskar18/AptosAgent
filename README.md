@@ -59,7 +59,7 @@ Aptos MiniHub is a revolutionary platform that combines AI-powered game generati
    - Connect Four
    - Reaction Duel
    - TicTacToe
-   - Maze Excape
+   - Maze Escape
    - Memory Game
    - Hangman Challenge
    - Tank game
