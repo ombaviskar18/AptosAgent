@@ -1,143 +1,107 @@
-module AptosMinihub::minigame {
-    use std::signer;
-    use std::string::{String, utf8};
-    use aptos_framework::event;
-    use AptosMinihub::minigame_factory;
+module tournament::game {
+    use std::vector;
+    use aptos_framework::coin;
+    use aptos_framework::aptos_coin::AptosCoin;
 
-    const E_NOT_PARTICIPANT: u64 = 100;
-    const E_INVALID_TURN: u64 = 101;
-    const E_GAME_COMPLETED: u64 = 102;
-
-    struct GameState has key {
-        id: u64,
-        prompt: String,
+    struct Tournament has store {
         creator: address,
-        ai_agent: address,
-        status: u8,
-        moves: vector<Move>,
-        current_player: address,
-        game_config: String,
-        result: u8,
+        entry_fee: u64,
+        participants: vector<address>,
+        prize_pool: coin::Coin<AptosCoin>,
+        status: bool,
+        top_three: vector<address>,
     }
 
-    struct Move has store {
-        player: address,
-        move_data: String,
-        timestamp: u64,
-    }
+    const ETOURNAMENT_CLOSED: u64 = 1;
+    const EALREADY_JOINED: u64 = 2;
+    const EINVALID_ENTRY_FEE: u64 = 3;
+    const EONLY_CREATOR: u64 = 4;
+    const EINVALID_TOP_THREE: u64 = 5;
+    const ENOT_ENOUGH_PARTICIPANTS: u64 = 6;
+    const EADDRESS_NOT_PARTICIPANT: u64 = 7;
 
-    struct GameEventStore has key {
-        move_events: event::EventHandle<MoveEvent>,
-        result_events: event::EventHandle<GameResultEvent>,
-    }
-
-    struct MoveEvent has drop, store {
-        game_id: u64,
-        player: address,
-        move_data: String,
-        timestamp: u64,
-    }
-
-    struct GameResultEvent has drop, store {
-        game_id: u64,
-        winner: address,
-        result: String,
-        timestamp: u64,
-    }
-
-    public(friend) fun initialize_game(
-        game_id: u64,
-        prompt: String,
+    public fun initialize(
         creator: address,
-        ai_agent: address
-    ) {
-        let game = GameState {
-            id: game_id,
-            prompt,
+        entry_fee: u64
+    ): Tournament {
+        Tournament {
             creator,
-            ai_agent,
-            status: 0, // PENDING
-            moves: vector::empty(),
-            current_player: creator,
-            game_config: utf8(b""),
-            result: 0,
+            entry_fee,
+            participants: vector::empty(),
+            prize_pool: coin::zero<AptosCoin>(),
+            status: true,
+            top_three: vector::empty(),
+        }
+    }
+
+    public fun join(
+        tournament: &mut Tournament,
+        player: address,
+        entry_coin: coin::Coin<AptosCoin>
+    ) {
+        assert!(tournament.status, ETOURNAMENT_CLOSED);
+        assert!(!vector::contains(&tournament.participants, &player), EALREADY_JOINED);
+        assert!(coin::value(&entry_coin) == tournament.entry_fee, EINVALID_ENTRY_FEE);
+
+        coin::merge(&mut tournament.prize_pool, entry_coin);
+        vector::push_back(&mut tournament.participants, player);
+    }
+
+    public fun finalize(
+        tournament: &mut Tournament,
+        caller: address,
+        top_three: vector<address>
+    ) {
+        assert!(caller == tournament.creator, EONLY_CREATOR);
+        assert!(tournament.status, ETOURNAMENT_CLOSED);
+        assert!(vector::length(&top_three) == 3, EINVALID_TOP_THREE);
+        
+        let participants_count = vector::length(&tournament.participants);
+        assert!(participants_count >= 3, ENOT_ENOUGH_PARTICIPANTS);
+
+        // Verify participants
+        let i = 0;
+        while (i < 3) {
+            let addr = *vector::borrow(&top_three, i);
+            assert!(vector::contains(&tournament.participants, &addr), EADDRESS_NOT_PARTICIPANT);
+            i = i + 1;
         };
 
-        move_to(&creator, game);
-        move_to(&creator, GameEventStore {
-            move_events: event::new_event_handle<MoveEvent>(&creator),
-            result_events: event::new_event_handle<GameResultEvent>(&creator),
-        });
+        tournament.top_three = top_three;
+        tournament.status = false;
+
+        // Calculate distribution
+        let total = coin::value(&tournament.prize_pool);
+        let commission = total * 10 / 100;
+        let prize_pool = total - commission;
+
+        // Distribute commission
+        let commission_coin = coin::withdraw(&mut tournament.prize_pool, commission);
+        coin::deposit(tournament.creator, commission_coin);
+
+        // Distribute prizes
+        let first = *vector::borrow(&tournament.top_three, 0);
+        let second = *vector::borrow(&tournament.top_three, 1);
+        let third = *vector::borrow(&tournament.top_three, 2);
+
+        distribute_prize(&mut tournament.prize_pool, first, prize_pool * 50 / 100);
+        distribute_prize(&mut tournament.prize_pool, second, prize_pool * 30 / 100);
+        distribute_prize(&mut tournament.prize_pool, third, prize_pool * 20 / 100);
+
+        // Handle remaining funds
+        let remaining = coin::value(&tournament.prize_pool);
+        if (remaining > 0) {
+            let remaining_coin = coin::withdraw(&mut tournament.prize_pool, remaining);
+            coin::deposit(first, remaining_coin);
+        }
     }
 
-    public entry fun submit_ai_config(
-        ai_agent: &signer,
-        game_id: u64,
-        config: String
-    ) acquires GameState, GameEventStore {
-        let agent_addr = signer::address_of(ai_agent);
-        let game = borrow_global_mut<GameState>(minigame_factory::get_game_address(game_id));
-        
-        assert!(agent_addr == game.ai_agent, E_NOT_PARTICIPANT);
-        assert!(game.status == 0, E_GAME_COMPLETED);
-
-        game.game_config = config;
-        game.status = 1; // ACTIVE
-    }
-
-    public entry fun player_move(
-        player: &signer,
-        game_id: u64,
-        move_data: String
-    ) acquires GameState, GameEventStore {
-        let player_addr = signer::address_of(player);
-        let game = borrow_global_mut<GameState>(minigame_factory::get_game_address(game_id));
-        let events = borrow_global_mut<GameEventStore>(minigame_factory::get_game_address(game_id));
-
-        assert!(game.status == 1, E_GAME_COMPLETED);
-        assert!(player_addr == game.current_player, E_INVALID_TURN);
-
-        let timestamp = aptos_framework::timestamp::now_seconds();
-        vector::push_back(&mut game.moves, Move {
-            player: player_addr,
-            move_data: copy move_data,
-            timestamp,
-        });
-
-        // Switch turns
-        game.current_player = if (player_addr == game.creator)
-            game.ai_agent
-        else
-            game.creator;
-
-        event::emit_event(&mut events.move_events, MoveEvent {
-            game_id,
-            player: player_addr,
-            move_data,
-            timestamp,
-        });
-    }
-
-    public entry fun finalize_game(
-        ai_agent: &signer,
-        game_id: u64,
-        result: String
-    ) acquires GameState, GameEventStore {
-        let agent_addr = signer::address_of(ai_agent);
-        let game = borrow_global_mut<GameState>(minigame_factory::get_game_address(game_id));
-        let events = borrow_global_mut<GameEventStore>(minigame_factory::get_game_address(game_id));
-
-        assert!(agent_addr == game.ai_agent, E_NOT_PARTICIPANT);
-        assert!(game.status == 1, E_GAME_COMPLETED);
-
-        game.status = 2; // COMPLETED
-        let timestamp = aptos_framework::timestamp::now_seconds();
-
-        event::emit_event(&mut events.result_events, GameResultEvent {
-            game_id,
-            winner: agent_addr,
-            result,
-            timestamp,
-        });
+    fun distribute_prize(
+        prize_pool: &mut coin::Coin<AptosCoin>,
+        winner: address,
+        amount: u64
+    ) {
+        let prize = coin::withdraw(prize_pool, amount);
+        coin::deposit(winner, prize);
     }
 }
