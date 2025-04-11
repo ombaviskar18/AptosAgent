@@ -55,11 +55,15 @@ Aptos MiniHub is a revolutionary platform that combines AI-powered game generati
 
 ## 🎯 Available Games
 
-1. **Classic Arcade Games**
-   - Ping Pong (Player vs AI)
-   - Snake Game
+1. **Trending Games Play with Ai**
+   - Connect Four
+   - Reaction Duel
    - TicTacToe
-   - Space Shooter
+   - Maze Excape
+   - Memory Game
+   - Hangman Challenge
+   - Tank game
+  
 
 2. **NFT Gaming Collections**
    - NFT Cards Battle
