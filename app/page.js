@@ -28,7 +28,7 @@ const VintageGamesLanding = () => {
     },
     {
       "id": "security",
-      "title": "Aptos AI Agent",
+      "title": "Move AI Agent",
       "description": "Next-Gen Compliance System with Move Agent Integration",
       "difficulty": "Advanced",
       "creator": "AptosMiniHub Team",
